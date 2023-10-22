@@ -8,13 +8,13 @@ function SideBar() {
     return (
         <aside className={styles.wrapper}>
             <MenuSidebar>
-                <MenuItems title="For You" to={config.route.home} icon={<HomeIcon></HomeIcon>}></MenuItems>
+                <MenuItems title="DashBoard" to={config.route.home} icon={<HomeIcon></HomeIcon>}></MenuItems>
                 <MenuItems
-                    title="Following"
+                    title="Staff User"
                     to={config.route.following}
                     icon={<UserGroupIcon></UserGroupIcon>}
                 ></MenuItems>
-                <MenuItems title="LIVE" to={config.route.live} icon={<LiveIcon></LiveIcon>}></MenuItems>
+                <MenuItems title="Post" to={config.route.live} icon={<LiveIcon></LiveIcon>}></MenuItems>
             </MenuSidebar>
         </aside>
     );

@@ -3,7 +3,8 @@ import Following from '~/pages/Following';
 import Upload from '~/pages/Upload';
 import Profile from '~/pages/Profile';
 import Live from '~/pages/Live';
-import { HeaderOnly } from '~/layouts';
+import LoginPage from '~/pages/Login';
+import { HeaderOnly, WhiteLayouts } from '~/layouts';
 import config from '~/config';
 
 const publicRounter = [
@@ -12,6 +13,7 @@ const publicRounter = [
     { path: config.route.live, component: Live },
     { path: config.route.profile, component: Profile },
     { path: config.route.upload, component: Upload, layouts: HeaderOnly },
+    { path: config.route.login, component: LoginPage, layouts: WhiteLayouts },
 ];
 
 const privateRounter = [];

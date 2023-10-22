@@ -91,7 +91,7 @@ function Header() {
         <header className={styles.wrapper}>
             <div className={styles.inner}>
                 <Link to={config.route.home} className={styles.logo}>
-                    <img src={images.logo} alt="TikTok"></img>
+                    <img className={styles.logoImage} src={images.CDLP_logo} alt="CDLP"></img>
                 </Link>
                 <Search></Search>
                 <div className={styles.actions}>
