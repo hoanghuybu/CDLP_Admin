@@ -1,14 +1,15 @@
-import Header from './Header';
+import Header from '../Header';
+import styles from './HeaderOnly.module.scss';
 
-function DefaultLayouts({ children }) {
+function HeaderOnly({ children }) {
     return (
-        <div>
+        <div className={styles.wrapper}>
             <Header />
-            <div className="container">
-                <div className="content">{children}</div>
+            <div className={styles.container}>
+                <div className={styles.content}>{children}</div>
             </div>
         </div>
     );
 }
 
-export default DefaultLayouts;
+export default HeaderOnly;

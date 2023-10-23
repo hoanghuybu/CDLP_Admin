@@ -77,8 +77,8 @@ function Live() {
                                                 </Dropdown.Toggle>
 
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
-                                                    <Dropdown.Item href="#/action-2">Delete</Dropdown.Item>
+                                                    <Dropdown.Item href="/details">Edit</Dropdown.Item>
+                                                    <Dropdown.Item href="/details">Delete</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </td>
