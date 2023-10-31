@@ -5,10 +5,13 @@ import Profile from '~/pages/Profile';
 import Live from '~/pages/Live';
 import LoginPage from '~/pages/Login';
 import Details from '~/pages/Details';
+import CreateStaff from '~/pages/CreateStaff';
 import { HeaderOnly, WhiteLayouts } from '~/layouts';
 import config from '~/config';
 
-const publicRounter = [
+const publicRounter = [{ path: config.route.login, component: LoginPage, layouts: WhiteLayouts }];
+
+const privateRounter = [
     { path: config.route.home, component: Home },
     { path: config.route.following, component: Following },
     { path: config.route.live, component: Live },
@@ -16,8 +19,7 @@ const publicRounter = [
     { path: config.route.upload, component: Upload, layouts: HeaderOnly },
     { path: config.route.login, component: LoginPage, layouts: WhiteLayouts },
     { path: config.route.details, component: Details, layouts: HeaderOnly },
+    { path: config.route.createStaff, component: CreateStaff, layouts: HeaderOnly },
 ];
-
-const privateRounter = [];
 
 export { privateRounter, publicRounter };

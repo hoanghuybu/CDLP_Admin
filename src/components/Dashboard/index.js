@@ -1,277 +1,158 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { useNavigate } from 'react-router-dom';
 
 function DashBoard() {
-    let cardColor, axisColor, borderColor;
+    const [accountTotal, setAccountTotal] = useState();
+    const [staffTotal, setStaffTotal] = useState();
+    const [postTotal, setPostTotal] = useState();
+    const [series, setSeries] = useState([{ data: [10, 19, 2] }]);
+    const navigate = useNavigate();
 
-    cardColor = '#fff';
-    // headingColor = '#566a7f';
-    axisColor = '#a1acb8';
-    borderColor = '#eceef1';
+    const colors = ['#03C3EC', '#71DD37', '#696cff'];
 
-    const state = {
+    var state = {
         series: [
             {
-                name: '2021',
-                data: [18, 7, 15, 29, 18, 12, 9],
-            },
-            {
-                name: '2020',
-                data: [-13, -18, -9, -14, -5, -17, -15],
+                data: [10, 19, 2],
             },
         ],
         options: {
             chart: {
                 height: 300,
-                stacked: true,
                 type: 'bar',
-                toolbar: { show: false },
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '33%',
-                    borderRadius: 12,
-                    startingShape: 'rounded',
-                    endingShape: 'rounded',
+                events: {
+                    click: function (chart, w, e) {
+                        // console.log(chart, w, e)
+                    },
                 },
             },
-            colors: ['#696cff', '#03c3ec'],
+            colors: colors,
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true,
+                },
+            },
             dataLabels: {
                 enabled: false,
             },
-            stroke: {
-                curve: 'smooth',
-                width: 6,
-                lineCap: 'round',
-                colors: [cardColor],
-            },
             legend: {
-                show: true,
-                horizontalAlign: 'left',
-                position: 'top',
-                markers: {
-                    height: 8,
-                    width: 8,
-                    radius: 12,
-                    offsetX: -3,
-                },
-                labels: {
-                    colors: axisColor,
-                },
-                itemMargin: {
-                    horizontal: 10,
-                },
-            },
-            grid: {
-                borderColor: borderColor,
-                padding: {
-                    top: 0,
-                    bottom: -8,
-                    left: 20,
-                    right: 20,
-                },
+                show: false,
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                categories: [
+                    ['User', ' Account'],
+                    ['Post', ' '],
+                    ['Staff', 'Account'],
+                ],
                 labels: {
                     style: {
-                        fontSize: '13px',
-                        colors: axisColor,
-                    },
-                },
-                axisTicks: {
-                    show: false,
-                },
-                axisBorder: {
-                    show: false,
-                },
-            },
-            yaxis: {
-                labels: {
-                    style: {
-                        fontSize: '13px',
-                        colors: axisColor,
-                    },
-                },
-            },
-            responsive: [
-                {
-                    breakpoint: 1700,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '32%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 1580,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '35%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 1440,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '42%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 1300,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '48%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 1200,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '40%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 1040,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 11,
-                                columnWidth: '48%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 991,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '30%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 840,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '35%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 768,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '28%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 640,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '32%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 576,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '37%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '45%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 420,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '52%',
-                            },
-                        },
-                    },
-                },
-                {
-                    breakpoint: 380,
-                    options: {
-                        plotOptions: {
-                            bar: {
-                                borderRadius: 10,
-                                columnWidth: '60%',
-                            },
-                        },
-                    },
-                },
-            ],
-            states: {
-                hover: {
-                    filter: {
-                        type: 'none',
-                    },
-                },
-                active: {
-                    filter: {
-                        type: 'none',
+                        colors: colors,
+                        fontSize: '12px',
                     },
                 },
             },
         },
     };
 
+    const handleRefresh = async () => {
+        const refreshToken = sessionStorage.getItem('refreshToken');
+        if (refreshToken) {
+            try {
+                const response = await fetch(
+                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    },
+                );
+
+                if (response.ok) {
+                    const data = await response.json();
+                    sessionStorage.setItem('accessToken', data.accessToken);
+                    sessionStorage.setItem('refreshToken', data.refreshToken);
+                    window.location.reload();
+                } else {
+                    console.error('Error refreshing token');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        } else {
+            navigate('/');
+        }
+    };
+
+    const fecthPostCount = async () => {
+        try {
+            const response = await fetch(
+                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count',
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
+                    },
+                },
+            );
+            if (response.status === 200) {
+                const responseData = await response.json();
+                setPostTotal(responseData);
+            }
+        } catch (error) {
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                await handleRefresh();
+            } else {
+                console.log(error);
+            }
+        }
+    };
+
+    const fetchListAccount = async () => {
+        try {
+            const response = await fetch('https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
+                },
+            });
+            if (response.status === 200) {
+                const responseData = await response.json();
+                const filteredAccounts = responseData.filter((account) => account.roleId === 1);
+                const filteredStaffs = responseData.filter((account) => account.roleId === 2);
+                const numberOfItems = filteredAccounts.length;
+                const numberOfStaffs = filteredStaffs.length;
+                setStaffTotal(numberOfStaffs);
+                setAccountTotal(numberOfItems);
+            }
+        } catch (error) {
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                await handleRefresh();
+            } else {
+                console.log(error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        fecthPostCount();
+        fetchListAccount();
+    }, []);
+    useEffect(() => {
+        const newSeries = [{ data: [accountTotal, postTotal, staffTotal] }];
+        setSeries(newSeries);
+    }, [postTotal, accountTotal, staffTotal]);
+
     return (
         <div>
             <div className="app">
                 <div className="row">
                     <div className="mixed-chart">
-                        <ReactApexChart options={state.options} series={state.series} type="bar" width="500" />
+                        <ReactApexChart options={state.options} series={series} type="bar" />
                     </div>
                 </div>
             </div>

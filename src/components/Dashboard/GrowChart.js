@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function GrowChart() {
-    let cardColor, headingColor, axisColor, borderColor;
+    let cardColor, headingColor;
+    const navigate = useNavigate();
+    const [series, setSeries] = useState([78]);
 
     cardColor = '#fff';
     headingColor = '#566a7f';
-    axisColor = '#a1acb8';
-    borderColor = '#eceef1';
     const state = {
-        series: [78],
         options: {
             labels: ['Growth'],
             chart: {
@@ -83,9 +84,68 @@ function GrowChart() {
             },
         },
     };
+
+    const handleRefresh = async () => {
+        const refreshToken = sessionStorage.getItem('refreshToken');
+        if (refreshToken) {
+            try {
+                const response = await fetch(
+                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    },
+                );
+
+                if (response.ok) {
+                    const data = await response.json();
+                    sessionStorage.setItem('accessToken', data.accessToken);
+                    sessionStorage.setItem('refreshToken', data.refreshToken);
+                    window.location.reload();
+                } else {
+                    console.error('Error refreshing token');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        } else {
+            navigate('/');
+        }
+    };
+    const fecthDataGrow = async () => {
+        try {
+            const response = await fetch(
+                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Posts/getStatitic',
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
+                    },
+                },
+            );
+            if (response.status === 200) {
+                const responseData = await response.json();
+                const newSeries = (responseData.postToday / responseData.postTotal) * 100;
+                setSeries([newSeries]);
+            }
+        } catch (error) {
+            if (error instanceof TypeError && error.message === 'Failed to fetch') {
+                await handleRefresh();
+            } else {
+                console.log(error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        fecthDataGrow();
+    }, []);
     return (
         <div id="chart">
-            <ReactApexChart options={state.options} series={state.series} type="radialBar" height={240} />
+            <ReactApexChart options={state.options} series={series} type="radialBar" height={240} />
         </div>
     );
 }

@@ -14,7 +14,7 @@ function SideBar() {
                     to={config.route.following}
                     icon={<UserGroupIcon></UserGroupIcon>}
                 ></MenuItems>
-                <MenuItems title="Post" to={config.route.live} icon={<LiveIcon></LiveIcon>}></MenuItems>
+                {/* <MenuItems title="Post" to={config.route.live} icon={<LiveIcon></LiveIcon>}></MenuItems> */}
             </MenuSidebar>
         </aside>
     );
