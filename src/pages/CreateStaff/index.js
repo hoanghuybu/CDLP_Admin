@@ -11,6 +11,8 @@ function CreateStaff() {
     const addressRef = useRef(null);
     const descriptionRef = useRef(null);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [isFailed, setIsFailed] = useState(false);
+    const [msgFailed, setMsgFailed] = useState('');
     const navigate = useNavigate;
 
     const handleRefresh = async () => {
@@ -80,7 +82,9 @@ function CreateStaff() {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 await handleRefresh();
             } else {
-                console.log(error);
+                const msg = `Error, please contact your administrator for assistance`;
+                setMsgFailed(msg);
+                setIsFailed(true);
             }
         }
     };
@@ -227,6 +231,7 @@ function CreateStaff() {
                                     </div>
                                 </form>
                                 {isSuccess && <h3 style={{ color: '#00AA00' }}>Create Success</h3>}
+                                {isFailed && <h3 style={{ color: '#fe2c55' }}>{msgFailed}</h3>}
                             </div>
                         </div>
                     </div>

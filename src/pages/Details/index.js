@@ -17,6 +17,8 @@ function UserDetails() {
     const navigate = useNavigate();
     const location = useLocation();
     const [currentPage, setCurrentPage] = useState(1);
+    const [isFailed, setIsFailed] = useState(false);
+    const [msgFailed, setMsgFailed] = useState('');
     const itemsPerPage = 3;
     const user = location?.state?.user;
 
@@ -110,7 +112,9 @@ function UserDetails() {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 await handleRefresh();
             } else {
-                console.log(error);
+                const msg = `Error, please contact your administrator for assistance`;
+                setMsgFailed(msg);
+                setIsFailed(true);
             }
         }
     };
@@ -134,7 +138,9 @@ function UserDetails() {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 await handleRefresh();
             } else {
-                console.log(error);
+                const msg = `Error, please contact your administrator for assistance`;
+                setMsgFailed(msg);
+                setIsFailed(true);
             }
         }
     };
@@ -158,7 +164,9 @@ function UserDetails() {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 await handleRefresh();
             } else {
-                console.log(error);
+                const msg = `Error, please contact your administrator for assistance`;
+                setMsgFailed(msg);
+                setIsFailed(true);
             }
         }
     };
@@ -476,6 +484,7 @@ function UserDetails() {
                                                 Update Success please back to list to check
                                             </h3>
                                         )}
+                                        {isFailed && <h3 style={{ color: '#fe2c55' }}>{msgFailed}</h3>}
                                     </div>
                                 </div>
                             </div>

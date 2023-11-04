@@ -5,6 +5,7 @@ import './Login.scss';
 
 function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
+    const [isFailed, setIsFailed] = useState(false);
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ function LoginPage() {
                     resolve();
                 }).then(navigate('/home'));
             } else if (response.status === 401) {
-                console.log('Wrong email or password');
+                setIsFailed(true);
             }
         } catch (error) {
             console.log(error);
@@ -114,6 +115,7 @@ function LoginPage() {
                         </button>
                     </div>
                 </form>
+                {isFailed && <h3 style={{ color: '#fe2c55' }}>Wrong Email Or Password</h3>}
             </div>
         </div>
     );

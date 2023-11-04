@@ -93,7 +93,7 @@ function Header() {
                                 text
                                 leftIcon={<FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>}
                             >
-                                Upload
+                                Create
                             </Button>
                             <Tippy delay={[0, 200]} content="User" placement="bottom">
                                 <button
