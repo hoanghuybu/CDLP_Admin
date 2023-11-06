@@ -23,7 +23,7 @@ function Profile() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -61,7 +61,7 @@ function Profile() {
 
         try {
             const response = await fetch(
-                `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/${userId}`,
+                `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/${userId}`,
                 {
                     method: 'GET',
                     headers: {
@@ -100,7 +100,7 @@ function Profile() {
 
         try {
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/UpdateProfile',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/UpdateProfile',
                 {
                     method: 'PUT',
                     headers: {
@@ -131,7 +131,7 @@ function Profile() {
             const formData = new FormData();
             formData.append('file', avatar);
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/FireBase/UploadImageFile',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/FireBase/UploadImageFile',
                 {
                     method: 'POST',
                     body: formData,
@@ -151,7 +151,7 @@ function Profile() {
                 };
                 try {
                     const response = await fetch(
-                        'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/UpdateProfile',
+                        'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/UpdateProfile',
                         {
                             method: 'PUT',
                             headers: {

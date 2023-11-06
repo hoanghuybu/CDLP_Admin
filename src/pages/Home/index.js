@@ -24,7 +24,7 @@ function Home() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -52,7 +52,7 @@ function Home() {
     const fecthPostCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count',
                 {
                     method: 'GET',
                     headers: {
@@ -77,7 +77,7 @@ function Home() {
     const fecthPostGiftCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27gift%27',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27gift%27',
                 {
                     method: 'GET',
                     headers: {
@@ -101,7 +101,7 @@ function Home() {
     const fecthPostServiceCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27service%27',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27service%27',
                 {
                     method: 'GET',
                     headers: {
@@ -125,7 +125,7 @@ function Home() {
     const fecthPostProductCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27product%27',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27product%27',
                 {
                     method: 'GET',
                     headers: {
@@ -149,7 +149,7 @@ function Home() {
 
     const fetchListAccount = async () => {
         try {
-            const response = await fetch('https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account', {
+            const response = await fetch('https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ function Home() {
     const fetchNewUserNum = async () => {
         try {
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/countNewUserToday',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/countNewUserToday',
                 {
                     method: 'GET',
                     headers: {
@@ -197,7 +197,7 @@ function Home() {
     const fecthDataGrow = async () => {
         try {
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Posts/getStatitic',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Posts/getStatitic',
                 {
                     method: 'GET',
                     headers: {
@@ -219,7 +219,7 @@ function Home() {
         }
     };
 
-    const filteredAccounts = listAccount.filter((account) => account.roleId === 1 || account.roleId === 2);
+    const filteredAccounts = listAccount.filter((account) => account.roleId === 3 || account.roleId === 2);
     useEffect(() => {
         fecthPostCount();
         fetchListAccount();

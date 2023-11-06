@@ -27,7 +27,7 @@ function UserDetails() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -55,7 +55,7 @@ function UserDetails() {
     const fetchListPostById = async () => {
         try {
             const response = await fetch(
-                `https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts?$filter=OwnerId eq ${user?.accountId}`,
+                `https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts?$filter=OwnerId eq ${user?.accountId}`,
                 {
                     method: 'GET',
                     headers: {
@@ -95,7 +95,7 @@ function UserDetails() {
 
         try {
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/UpdateProfile',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/UpdateProfile',
                 {
                     method: 'PUT',
                     headers: {
@@ -106,11 +106,45 @@ function UserDetails() {
                 },
             );
             if (response.status === 200) {
+                if (isFailed === true) {
+                    setIsFailed(false);
+                }
                 setIsSuccess(true);
+            } else {
+                const data = await response.json();
+                let errorMessages = [];
+                if (data.errors) {
+                    if (data.errors.Email) {
+                        errorMessages.push(data.errors.Email.join('<br />'));
+                    }
+                    if (data.errors.FullName) {
+                        errorMessages.push(data.errors.FullName.join('<br />'));
+                    }
+                    if (data.errors.Phone) {
+                        errorMessages.push(data.errors.Phone.join('<br />'));
+                    }
+                } else {
+                    errorMessages = ['Unknow error, please connect to admin to support'];
+                }
+                const combinedErrorMessage = errorMessages.join('<br />');
+                setMsgFailed(combinedErrorMessage);
+                if (isSuccess === true) {
+                    setIsSuccess(false);
+                }
+                setIsFailed(true);
             }
         } catch (error) {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 await handleRefresh();
+            } else if (
+                error instanceof SyntaxError &&
+                error.message === 'Unexpected token \'E\', "Email are "... is not valid JSON'
+            ) {
+                setMsgFailed(['Email are already use!']);
+                if (isSuccess === true) {
+                    setIsSuccess(false);
+                }
+                setIsFailed(true);
             } else {
                 const msg = `Error, please contact your administrator for assistance`;
                 setMsgFailed(msg);
@@ -122,7 +156,7 @@ function UserDetails() {
     const handleUnbanUser = async () => {
         try {
             const response = await fetch(
-                `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/Unban?id=${user.accountId}`,
+                `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/Unban?id=${user.accountId}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -148,7 +182,7 @@ function UserDetails() {
     const handleBanUser = async () => {
         try {
             const response = await fetch(
-                `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/Ban?id=${user.accountId}&reason=${banReasonRef.current.value}`,
+                `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/Ban?id=${user.accountId}&reason=${banReasonRef.current.value}`,
                 {
                     method: 'DELETE',
                     headers: {
@@ -158,7 +192,17 @@ function UserDetails() {
                 },
             );
             if (response.status === 200) {
+                if (isFailed === true) {
+                    setIsFailed(false);
+                }
                 setIsSuccess(true);
+            } else {
+                const msg = 'Please input Ban Reason before the Ban';
+                setMsgFailed(msg);
+                if (isSuccess === true) {
+                    setIsSuccess(false);
+                }
+                setIsFailed(true);
             }
         } catch (error) {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
@@ -484,7 +528,12 @@ function UserDetails() {
                                                 Update Success please back to list to check
                                             </h3>
                                         )}
-                                        {isFailed && <h3 style={{ color: '#fe2c55' }}>{msgFailed}</h3>}
+                                        {isFailed && (
+                                            <h3
+                                                style={{ color: '#fe2c55' }}
+                                                dangerouslySetInnerHTML={{ __html: msgFailed }}
+                                            ></h3>
+                                        )}
                                     </div>
                                 </div>
                             </div>

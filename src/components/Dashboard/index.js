@@ -61,7 +61,7 @@ function DashBoard() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -89,7 +89,7 @@ function DashBoard() {
     const fecthPostCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count',
                 {
                     method: 'GET',
                     headers: {
@@ -113,7 +113,7 @@ function DashBoard() {
 
     const fetchListAccount = async () => {
         try {
-            const response = await fetch('https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account', {
+            const response = await fetch('https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ function DashBoard() {
             });
             if (response.status === 200) {
                 const responseData = await response.json();
-                const filteredAccounts = responseData.filter((account) => account.roleId === 1);
+                const filteredAccounts = responseData.filter((account) => account.roleId === 3);
                 const filteredStaffs = responseData.filter((account) => account.roleId === 2);
                 const numberOfItems = filteredAccounts.length;
                 const numberOfStaffs = filteredStaffs.length;

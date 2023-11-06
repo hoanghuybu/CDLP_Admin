@@ -20,7 +20,7 @@ function CreateStaff() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -65,7 +65,7 @@ function CreateStaff() {
 
         try {
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Account/CreateAccount',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Account/CreateStaffAccount',
                 {
                     method: 'POST',
                     headers: {
@@ -76,11 +76,53 @@ function CreateStaff() {
                 },
             );
             if (response.status === 201) {
+                if (isFailed === true) {
+                    setIsFailed(false);
+                }
                 setIsSuccess(true);
+            } else {
+                const data = await response.json();
+                let errorMessages = [];
+                if (data.errors) {
+                    if (data.errors.Email) {
+                        errorMessages.push(data.errors.Email.join('<br />'));
+                    }
+                    if (data.errors.FullName) {
+                        errorMessages.push(data.errors.FullName.join('<br />'));
+                    }
+                    if (data.errors.Password) {
+                        errorMessages.push(data.errors.Password.join('<br />'));
+                    }
+                    if (data.errors.PasswordConfirm) {
+                        errorMessages.push(data.errors.PasswordConfirm.join('<br />'));
+                    }
+                } else {
+                    errorMessages = ['Unknow error, please connect to admin to support'];
+                }
+                const combinedErrorMessage = errorMessages.join('<br />');
+                setMsgFailed(combinedErrorMessage);
+                if (isSuccess === true) {
+                    setIsSuccess(false);
+                }
+                setIsFailed(true);
             }
         } catch (error) {
             if (error instanceof TypeError && error.message === 'Failed to fetch') {
                 await handleRefresh();
+            } else if (error instanceof SyntaxError) {
+                let errorMessages = [];
+                if (error.message === 'Unexpected token \'E\', "Email are "... is not valid JSON') {
+                    errorMessages.push(['Email are already use! <br />']);
+                }
+                if (error.message === 'Unexpected token \'P\', "Password n"... is not valid JSON') {
+                    errorMessages.push(['Password not match with confirm <br />']);
+                }
+                const combinedErrorMessage = errorMessages.join('<br />');
+                setMsgFailed(combinedErrorMessage);
+                if (isSuccess === true) {
+                    setIsSuccess(false);
+                }
+                setIsFailed(true);
             } else {
                 const msg = `Error, please contact your administrator for assistance`;
                 setMsgFailed(msg);
@@ -225,13 +267,18 @@ function CreateStaff() {
                                     <div className="row justify-content-end">
                                         <div className="col-sm-10">
                                             <button type="submit" className="btn btn-primary">
-                                                Update
+                                                Create
                                             </button>
                                         </div>
                                     </div>
                                 </form>
                                 {isSuccess && <h3 style={{ color: '#00AA00' }}>Create Success</h3>}
-                                {isFailed && <h3 style={{ color: '#fe2c55' }}>{msgFailed}</h3>}
+                                {isFailed && (
+                                    <h3
+                                        style={{ color: '#fe2c55' }}
+                                        dangerouslySetInnerHTML={{ __html: msgFailed }}
+                                    ></h3>
+                                )}
                             </div>
                         </div>
                     </div>

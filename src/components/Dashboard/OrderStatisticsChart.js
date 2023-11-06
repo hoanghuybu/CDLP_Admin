@@ -84,7 +84,7 @@ function OrderStatisticsChart() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -111,7 +111,7 @@ function OrderStatisticsChart() {
     const fecthPostGiftCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27gift%27',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27gift%27',
                 {
                     method: 'GET',
                     headers: {
@@ -135,7 +135,7 @@ function OrderStatisticsChart() {
     const fecthPostServiceCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27service%27',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27service%27',
                 {
                     method: 'GET',
                     headers: {
@@ -159,7 +159,7 @@ function OrderStatisticsChart() {
     const fecthPostProductCount = async () => {
         try {
             const response = await fetch(
-                'https://beprn231cardogloverodata20231030114819.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27product%27',
+                'https://beprn231cardogloverodata20231105200328.azurewebsites.net/odata/Posts/$count?$filter=type%20eq%20%27product%27',
                 {
                     method: 'GET',
                     headers: {

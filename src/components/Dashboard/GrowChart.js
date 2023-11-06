@@ -90,7 +90,7 @@ function GrowChart() {
         if (refreshToken) {
             try {
                 const response = await fetch(
-                    `https://beprn231catdoglover20231030132717.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
+                    `https://beprn231catdoglover20231105200231.azurewebsites.net/api/Auth/RefreshToken/${refreshToken}`,
                     {
                         method: 'GET',
                         headers: {
@@ -117,7 +117,7 @@ function GrowChart() {
     const fecthDataGrow = async () => {
         try {
             const response = await fetch(
-                'https://beprn231catdoglover20231030132717.azurewebsites.net/api/Posts/getStatitic',
+                'https://beprn231catdoglover20231105200231.azurewebsites.net/api/Posts/getStatitic',
                 {
                     method: 'GET',
                     headers: {
